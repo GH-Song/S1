@@ -1,0 +1,7 @@
+git add -A
+git commit -m "수행내용"
+git push
+(base) C:\Users\anffl>git config --global user.name "GH-Song"
+
+(base) C:\Users\anffl>git config --global user.email "anfflrnrgh@gmail.com"
+(base) C:\SongsProjectfiles>git clone https://github.com/GH-Song/S1.git

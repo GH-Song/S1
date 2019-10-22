@@ -38,26 +38,29 @@ while True:
     # have a maximum width of 400 pixels, and convert it to
     # grayscale
     frame = vs.read()
-    frame = imutils.resize(frame, width=600)
+    frame = imutils.resize(frame, width=800)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     cv2.imshow("Frame", frame)
     # detect faces in the grayscale frame
-    rects = detector(gray, 1)
- 
+    rects = detector(gray, 0) # 직사각형으로 얼굴(들) 검출
+
     # loop over the face detections
-    for (i, rect) in enumerate(rects):
+    for rect in rects:
+        # rect에는 얼굴 하나의 왼쪽 위 오른쪽 아래 좌표
         # determine the facial landmarks for the face region, then
         # convert the landmark (x, y)-coordinates to a NumPy array
+        # print(rect)
         shape = predictor(gray, rect)
         shape = face_utils.shape_to_np(shape)
-       
         # loop over the face parts individually
         i,j = face_utils.FACIAL_LANDMARKS_IDXS["mouth"]
         for (x, y) in shape[i:j]:
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
         for (x, y) in shape[28:29]:
+            cv2.rectangle(frame,(x-160, y-150), (x+160,y-70), (255, 255, 255), -1 )
             cv2.rectangle(frame,(x-160, y-150), (x+160,y-70), (0, 0, 255), 1 )
         cv2.imshow("Frame", frame)
+        # print("frame is printed")
     
     # show the frame
     # cv2.imshow("Frame", frame)
